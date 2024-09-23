@@ -46,7 +46,7 @@ const [players1, players2] = game.players;
 
 //2.Now we want to separate the gk from the field players so we destructure again
 const [gk, ...fieldPlayers] = players1;
-console.log();
+// console.log();
 
 //3.all players in a singe array
 const allPlayers = [...players1, ...players2];
@@ -62,7 +62,7 @@ const {
 
 //6.Printgoals functions should take an arbitrary amount of players
 const printGoals = function (...players) {
-	console.log(`${players.length} goals was scored`);
+	// console.log(`${players.length} goals was scored`);
 };
 
 // printGoals("Davies", "Muller", "Lewandowski", "Kimmich"); // returns 4 goals
@@ -75,3 +75,24 @@ printGoals(...game.scored); // if we dont use the spread operator gonna return o
 // we use && because we want if the first is true to keep evaluating
 team1 < team2 && console.log("team1 is more likely to win");
 team1 > team2 && console.log("team 2 is more likely to win");
+
+//8. score on the score array and print all players in the console
+
+for (const [i, player] of game.scored.entries())
+	console.log(`Goal ${i + 1}: ${player}`);
+
+//9. calculate average odds
+
+let average = 0;
+const odds = Object.values(game.odds);
+for (const odd of Object.values(odds)) {
+	average += odd.length;
+	average /= Object.values(odds);
+}
+
+//10. print the content of the object in the console
+for (const [team, odd] of Object.entries(game.odds)) {
+	// console.log(team, odd);
+	const teamString = team === "x" ? "draw" : `'victory' ${game[team]}`;
+	console.log();
+}
