@@ -39,6 +39,20 @@ const game = {
 	},
 };
 
+const gameEvents = new Map([
+	[17, "⚽️ GOAL"],
+	[36, "🔁 Substitution"],
+	[47, "⚽️ GOAL"],
+	[61, "🔁 Substitution"],
+	[64, "🔶 Yellow card"],
+	[69, "🔴 Red card"],
+	[70, "🔁 Substitution"],
+	[72, "🔁 Substitution"],
+	[76, "⚽️ GOAL"],
+	[80, "⚽️ GOAL"],
+	[92, "🔶 Yellow card"],
+]);
+
 //1. destructure the arrays of the players
 //we destructure the arrays because we want them separate and they were in the same object property name
 const [players1, players2] = game.players;
@@ -94,5 +108,31 @@ for (const odd of Object.values(odds)) {
 for (const [team, odd] of Object.entries(game.odds)) {
 	// console.log(team, odd);
 	const teamString = team === "x" ? "draw" : `'victory' ${game[team]}`;
-	console.log();
+	console.log(`Odd of ${teamString} ${odd}`);
+}
+
+//11.
+// get map values
+// const events = gameEvents.values();
+// get the unique values we need to create a new SET -> object format
+//turns this in to an array
+const events = [...new Set(gameEvents.values())];
+
+//12. delete event yellow card
+gameEvents.delete(64);
+
+//13.
+// console.log(`An event happen d, on average every ${90 / gameEvents.size}`);
+// after we get teh evalues of a set we need always turn it to array format instead ti be able to manipulate the data
+// //const time = [...gameEvents.keys()];
+//we want the last value of the array
+const time = [...gameEvents.keys()].pop();
+console.log(`An event happen d, on average every ${time / gameEvents.size}`);
+
+// 14.
+//loop through the MAP
+for (const [min, event] of gameEvents) {
+	const half = min <= 45 ? "First" : "Second";
+	// we need to figure out if is the first half or the second half of the game
+	console.log(`${half}[HALF] ${min} : ${event}`);
 }
